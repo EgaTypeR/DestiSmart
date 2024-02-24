@@ -26,20 +26,20 @@ v. DestiSmart<br/>
         membuat perencanaan wisata yang matang dengan destinasi yang cocok. Dengan<br/>
         implementasi solusi ini, diharapkan sektor pariwisata lokal di Indonesia dapat tumbuh<br/>
         dengan pesat dan kesejahteraan masyarakat setempat bisa meningkat.<br/>
-    = Rumusan Permasalahan:<br/>
+    - Rumusan Permasalahan:<br/>
         - Kurangnya perhatian pemerintah terhadap tempat wisata lokal<br/>
         - Tantangan dalam memperkenalkan tempat wisata lokal kepada wisatawan luar daerah<br/>
         - Perencanaan wisata yang membutuhkan waktu dari sisi turis<br/>
     - Ide Solusi: Aplikasi web dengan berbasis AI dalam penentuan wisata lokal daerah<br/>
-    - Rancangan Fitur Solusi:
-        | Fitur                 | Keterangan |
-        |---------------------  |------------|
-        | Rekomendasi Wisata    | Diberikan saran perjalanan oleh AI yang telah dipilih dari pilihan yang diberikan oleh aplikasi sehingga pengguna dapat mendapatkan insight tentang wisata yang dituju dengan rencana perjalanan yang baik.   |
-        | Rencana Wisata        | Terkadang kita terlalu sibuk untuk memikirkan kapan dan dimana kita akan menuju tempat wisata, bahkan untuk memikirkan hotel dan makanan saja perlu membutuhkan banyak waktu untuk memikirkan hal tersebut. Disini akan diberikan sebuah perencanaan dari berangkat sampai pulang sehingga user tidak perlu memikirkan banyak hal dalam perencanaan wisata.   |
-        | Narasi Interaktif     | Pengguna dapat mendapatkan tour guide pada narasi informatif jika berkunjung pada tempat bersejarah, budaya, dan fakta-fakta unik setiap tempat wisata.   |
-    - Analisis Kompetitor:
-        |   Nama    |   Jenis Kompetitor    |   Jenis Produk    |   Target Customer |   Kelebihan   |   Kekurangan  |   Key Competitive Advantage & Unique Value    |
-        |   Google Maps |   Indirect  | Aplikasi peta digital dan navigasi yang menyediakan informasi tentang lokasi, arah, dan transportasi umum.  |   Pengguna yang ingin mencari lokasi dan review dari lokasi tersebut. | - Memetakan posisi dari tempat pariwisata yang dituju<br/>- Dapat mencarikan rekomendasi jalur menuju destinasi<br/>- Navigasi realtime  |   - Review pelanggan yang kurang objektif terhadap tempat yang tidak mereka sukai<br/>- Petunjuk arah yg sering salah apabila berada di tempat yang jauh dari perkotaan<br/>= Kurangnya saran akan tempat pariwisata sesuai keinginan pengguna |   Google Maps menonjol dalam penyediaan informasi lalu lintas secara real-time dan kemudahan akses karena dapat diakses dari berbagai platform yang berbeda.   |
+    - Rancangan Fitur Solusi:<br/>
+        | Fitur                 | Keterangan |<br/>
+        |---------------------  |------------|<br/>
+        | Rekomendasi Wisata    | Diberikan saran perjalanan oleh AI yang telah dipilih dari pilihan yang diberikan oleh aplikasi sehingga pengguna dapat mendapatkan insight tentang wisata yang dituju dengan rencana perjalanan yang baik.   |<br/>
+        | Rencana Wisata        | Terkadang kita terlalu sibuk untuk memikirkan kapan dan dimana kita akan menuju tempat wisata, bahkan untuk memikirkan hotel dan makanan saja perlu membutuhkan banyak waktu untuk memikirkan hal tersebut. Disini akan diberikan sebuah perencanaan dari berangkat sampai pulang sehingga user tidak perlu memikirkan banyak hal dalam perencanaan wisata.   |<br/>
+        | Narasi Interaktif     | Pengguna dapat mendapatkan tour guide pada narasi informatif jika berkunjung pada tempat bersejarah, budaya, dan fakta-fakta unik setiap tempat wisata.   |<br/>
+    - Analisis Kompetitor:<br/>
+        |   Nama    |   Jenis Kompetitor    |   Jenis Produk    |   Target Customer |   Kelebihan   |   Kekurangan  |   Key Competitive Advantage & Unique Value    |<br/>
+        |   Google Maps |   Indirect  | Aplikasi peta digital dan navigasi yang menyediakan informasi tentang lokasi, arah, dan transportasi umum.  |   Pengguna yang ingin mencari lokasi dan review dari lokasi tersebut. | - Memetakan posisi dari tempat pariwisata yang dituju<br/>- Dapat mencarikan rekomendasi jalur menuju destinasi<br/>- Navigasi realtime  |   - Review pelanggan yang kurang objektif terhadap tempat yang tidak mereka sukai<br/>- Petunjuk arah yg sering salah apabila berada di tempat yang jauh dari perkotaan<br/>= Kurangnya saran akan tempat pariwisata sesuai keinginan pengguna |   Google Maps menonjol dalam penyediaan informasi lalu lintas secara real-time dan kemudahan akses karena dapat diakses dari berbagai platform yang berbeda.   |<br/>
 
 
     
