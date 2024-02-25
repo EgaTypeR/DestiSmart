@@ -16,12 +16,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
         
+      - name: List Contents 
+        run: ls -l
+
       - name: Change Directory to Backend
         run: cd backend
 
       - name: List Contents of Backend Folder
         run: ls -l
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
