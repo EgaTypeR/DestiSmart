@@ -18,6 +18,9 @@ jobs:
         
       - name: Change Directory to Backend
         run: cd backend
+
+      - name: List Contents of Backend Folder
+        run: ls -l
         
       - name: Setup Node.js
         uses: actions/setup-node@v2
