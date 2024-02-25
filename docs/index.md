@@ -1,16 +1,16 @@
 # Nama Kelompok: TourTech
 
-## Anggota Kelompok
+## Anggota Kelompok:
 - Haikal Hilmi - 21/482625/TK/53328
 - Ega Rizky Setiawan - 21/479314/TK/52861
 - Thoriqutsani Anastyo Rasnan - 21/479154/TK/52816
 
 ## Project: Senior Project TI
 
-## Departemen
-Teknologi Teknik Elektro dan Teknologi Informasi, Fakultas Teknik, Universitas Gadjah Mada
+## Institusi:
+Departemen Teknologi Teknik Elektro dan Teknologi Informasi, Fakultas Teknik, Universitas Gadjah Mada
 
-## DestiSmart
+## DestiSmart:
 - **Jenis Produk**: Travel Advisor
 - **Latar Belakang**:
   Indonesia memiliki berbagai ragam geografis, geologis, sosial, dan budaya, yang menjadikan negara ini memiliki banyak sektor pariwisata. Namun, banyak sektor pariwisata yang kurang dikembangkan dan diperhatikan oleh pemerintah, sehingga banyak tempat wisata yang tidak diketahui oleh para wisatawan. Di sisi lain, para turis seringkali bingung dalam membuat perencanaan wisata. Oleh karena itu, kami menawarkan solusi berupa aplikasi web dengan AI yang dapat memberikan rekomendasi tempat wisata lokal kepada calon pengunjung, sehingga mereka dapat membuat perencanaan wisata yang matang. Dengan implementasi solusi ini, diharapkan sektor pariwisata lokal dapat tumbuh pesat dan kesejahteraan masyarakat setempat meningkat.
@@ -43,7 +43,7 @@ Teknologi Teknik Elektro dan Teknologi Informasi, Fakultas Teknik, Universitas G
 
   ![Use Case Diagram](assets/usecasediagram.png)
   
-- **Functional Requirements**
+- **Functional Requirements**:
 
   | FR    | Deskripsi   |
   |-------|-------------|
@@ -51,6 +51,10 @@ Teknologi Teknik Elektro dan Teknologi Informasi, Fakultas Teknik, Universitas G
   | FR 2  | Aplikasi dapat memberikan rekomendasi tempat wisata sesuai dengan input prompt yang diberikan oleh user  |
   | FR 3  | Aplikasi mampu memberikan arahan untuk menuju lokasi tempat wisata yang direkomendasikan  |
   | FR 4  | Aplikasi dapat memberikan estimasi biaya yang dibutuhkan oleh user untuk mengunjungi tempat wisata yang direkomendasikan |
+
+- **Entity Relationship Diagram**:
+
+- **Low-Fidelity Wireframe**:
 
 - **Gantt-Chart**:
 
