@@ -14,25 +14,28 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [14.x]
     
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
         
-      - name: Change Directory to Backend
-        run: cd backend
-        
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          
+
       - name: Install Dependencies
-        run: npm install
-        
+        run: |
+          cd backend  # Change directory to backend folder
+          npm install  # Install dependencies
+          
       - name: Run Tests
-        run: npm test
+        run: |
+          cd backend  # Change directory to backend folder
+          npm test  # Run tests
         
       - name: Build Application
-        run: npm run build
+        run: |
+          cd backend  # Change directory to backend folder
+          npm run build  # Build application
