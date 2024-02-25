@@ -1,37 +1,23 @@
-name: DestiSmart Test and Build Workflow
+name: DestiSmart Test Build
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
 
 jobs:
   test-build:
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [16.x]
     
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-        
-      - name: List Contents 
-        run: ls -l
-
-      - name: Change Directory to Backend
-        run: cd backend/backend
-
-      - name: List Contents of Backend Folder
-        run: ls -l
-
-      - name: Setup Node.js
+      - uses: actions/checkout@v2
+      - name: Testing Build pre-Deploy
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          
-      - name: Install Backend Dependencies
-        run: npm install
-        
-      - name: Build Backend Application
-        run: npm run build
+          cache: "npm"
+      - run: npm i
+      - run: npm run build
