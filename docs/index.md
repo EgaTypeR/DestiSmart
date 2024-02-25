@@ -44,6 +44,7 @@ Teknologi Teknik Elektro dan Teknologi Informasi, Fakultas Teknik, Universitas G
   ![Use Case Diagram](assets/usecasediagram.png)
   
 - **Functional Requirements**
+
   | FR    | Deskripsi   |
   |-------|-------------|
   | FR 1  | Aplikasi dapat menerima input prompt dari user  |
