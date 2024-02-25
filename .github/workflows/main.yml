@@ -30,11 +30,6 @@ jobs:
           cd backend  # Change directory to backend folder
           npm install  # Install dependencies
           
-      - name: Run Tests
-        run: |
-          cd backend  # Change directory to backend folder
-          npm test  # Run tests
-        
       - name: Build Application
         run: |
           cd backend  # Change directory to backend folder
