@@ -51,3 +51,7 @@ Teknologi Teknik Elektro dan Teknologi Informasi, Fakultas Teknik, Universitas G
   | FR 2  | Aplikasi dapat memberikan rekomendasi tempat wisata sesuai dengan input prompt yang diberikan oleh user  |
   | FR 3  | Aplikasi mampu memberikan arahan untuk menuju lokasi tempat wisata yang direkomendasikan  |
   | FR 4  | Aplikasi dapat memberikan estimasi biaya yang dibutuhkan oleh user untuk mengunjungi tempat wisata yang direkomendasikan |
+
+- **Gantt-Chart**:
+
+  ![Gantt-Chart](assets/gantt-chart.png)
