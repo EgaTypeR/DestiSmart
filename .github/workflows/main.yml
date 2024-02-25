@@ -20,7 +20,7 @@ jobs:
         run: ls -l
 
       - name: Change Directory to Backend
-        run: cd backend
+        run: cd backend/backend
 
       - name: List Contents of Backend Folder
         run: ls -l
