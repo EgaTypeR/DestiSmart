@@ -3,7 +3,7 @@ Aplikasi web berbasis AI untuk membantu mencari tempat wisata lokal daerah
 
 Kelompok TourTech
 
-Ketua Kelompok: 
+Ketua Kelompok: Haikal Hilmi - 21/482625/TK/53328
 
 Anggota 1: Thoriqutsani Anastyo Rasnan - 21/479154/TK/52816
 
