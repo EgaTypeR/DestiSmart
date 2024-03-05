@@ -1,7 +1,7 @@
 # DestiSmart
 Aplikasi web berbasis AI untuk membantu mencari tempat wisata lokal daerah
 
-Kelompok TourTech
+Kelompok TourTech - Senior Project
 
 Ketua Kelompok: Haikal Hilmi - 21/482625/TK/53328
 
