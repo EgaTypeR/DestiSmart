@@ -5,13 +5,14 @@ const helmet = require('helmet')
 const rateLimit = require('express-rate-limit')
 const mongoSanitize = require('express-mongo-sanitize')
 const hpp = require('hpp')
-
+const morgan = require('morgan')
 
 const SetupDB = require('./src/models/setupDB')
+const AppError = require('./src/utils/appError')
+const globalErrorHandler = require('./src/controllers/errController')
 // Import Routers
 const UserRouter = require('./src/routers/userRouter')
-
-
+const ChattingRouter = require('./src/routers/chattingRoute')
 
 const app = express()
 SetupDB()
@@ -41,11 +42,15 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api/v1/user', UserRouter)
+app.use('/api/v1/chat', ChattingRouter)
 
-app.use('*', (req, res, next) => {
-  const err = new AppError(404, 'fail', 'undefined route');
-  next(err, req, res, next);
-});
+// app.use('*', (req, res, next) => {
+//   const err = new AppError(404, 'fail', 'undefined route');
+//   next(err, req, res, next);
+// });
+
+app.use(globalErrorHandler)
+app.use(morgan('dev'))
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`)
