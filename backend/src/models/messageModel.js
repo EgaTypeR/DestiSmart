@@ -7,12 +7,17 @@ const messageModel = new Schema ({
     required: true
   },
   senderID: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users',
     required: true
   },
   content: {
     type: String,
     required: true
+  },
+  response:{
+    type: String,
+    required: false
   }
 },
 {

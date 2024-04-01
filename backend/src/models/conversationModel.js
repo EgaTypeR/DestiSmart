@@ -8,7 +8,15 @@ const conversationModel = new Schema ({
   },
   name : {
     type: String,
-    required: true
+    required: false
+  },
+  lastMessage :{
+    type: String,
+    required: false
+  },
+  lastMessageDate : {
+    type: Date,
+    required: false
   },
 },
 {
