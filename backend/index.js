@@ -10,9 +10,11 @@ const morgan = require('morgan')
 const SetupDB = require('./src/models/setupDB')
 const AppError = require('./src/utils/appError')
 const globalErrorHandler = require('./src/controllers/errController')
+
 // Import Routers
 const UserRouter = require('./src/routers/userRouter')
 const ChattingRouter = require('./src/routers/chattingRoute')
+const AuthRouter = require('./src/routers/authRoute')
 
 const app = express()
 SetupDB()
@@ -43,6 +45,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/v1/user', UserRouter)
 app.use('/api/v1/chat', ChattingRouter)
+app.use('/api/v1/auth', AuthRouter)
 
 // app.use('*', (req, res, next) => {
 //   const err = new AppError(404, 'fail', 'undefined route');
