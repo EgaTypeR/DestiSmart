@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test-build:
+  test-run:
     runs-on: ubuntu-latest
     
     strategy:
@@ -30,7 +30,7 @@ jobs:
           cd backend   
           npm install
         
-      - name: Build Application
+      - name: Run Application
         run: |
           cd backend 
-          npm run build
+          node index.js
