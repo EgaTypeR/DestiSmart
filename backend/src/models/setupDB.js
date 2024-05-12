@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const InitDB = () =>{
-    const dbUrl = process.env.DB_URL.replace('<password>', process.env.DB_PASSWORD);
+    const dbUrl = process.env.DB_URL;
     mongoose.connect(dbUrl);
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));

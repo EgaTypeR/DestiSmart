@@ -2,6 +2,7 @@ const messageModel = require('../models/messageModel');
 const getChatBotResponse = require('../utils/getChatbotResponse');
 const responseModel = require('../models/responseModel');
 const conversationModel = require('../models/conversationModel');
+const {IsValidObjectId} = require('../utils/validate');
 
 exports.sendMessage = async (req, res, next) => {
   try {
@@ -30,17 +31,21 @@ exports.sendMessage = async (req, res, next) => {
 
 exports.getConversation = async (req, res, next) => {
   const conversationID = req.params.conversation_id;
-  if (!conversationID) {
-    return res.status(400).json({message: 'No conversation ID provided!'});
+  if (!conversationID || !IsValidObjectId(conversationID)) {
+    return res.status(400).json({message: 'Invalid ID!'});
   }
   try{
-    var conversation = await conversationModel.findById(conversationID).populate('messages');
+    var conversation = await conversationModel.findById(conversationID);
     if (!conversation) {
       return res.status(404).json({message: 'No conversation found!'});
     }
+    var messages = await messageModel.find({'conversationID' : conversationID}).sort({createdAt: 1});
     return res.status(200).json({
       message: 'Success',
-      data: conversation
+      data: {
+        conversation : conversation,
+        messages : messages
+    }
     });
   }
   catch (error) {
