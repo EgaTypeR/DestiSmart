@@ -11,7 +11,7 @@ const messageModel = new Schema ({
     ref: 'users',
     required: true
   },
-  content: {
+  prompt: {
     type: String,
     required: true
   },
