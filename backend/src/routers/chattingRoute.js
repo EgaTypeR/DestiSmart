@@ -6,5 +6,7 @@ router.get('/get-conversation/:conversation_id', userMiddleware,chattingControll
 router.get('/list-conversations/:user_id', userMiddleware,  chattingController.getListOfConversations);
 router.post('/send-message', userMiddleware,chattingController.sendMessage);
 router.post('/create-conversation/:user_id', userMiddleware,chattingController.createNewConversation);
+router.post('/tourism-recommendation', userMiddleware, chattingController.getTourismRecommendation);
+router.post('/custom-prompt', userMiddleware, chattingController.customPrompt);
 
 module.exports = router;

@@ -1,27 +1,58 @@
 const messageModel = require('../models/messageModel');
 const userModel = require('../models/userModels');
-const {getChatBotResponse, getTopic} = require('../utils/getChatbotResponse');
-const responseModel = require('../models/responseModel');
+const {getChatBotResponse, getTopic, getTourismRecommendation, getCustomPrompt} = require('../utils/getChatbotResponse');
 const conversationModel = require('../models/conversationModel');
 const {IsValidObjectId} = require('../utils/validate');
 
 exports.sendMessage = async (req, res, next) => {
   try {
+    // Capture data from the request
     var message = req.body;
     if (!message) {
       return res.status(400).json({message: 'Message data is required!'});
     }
     var messageToAdd = new messageModel(message);
-    sender = await userModel.findById(messageToAdd.senderID);
+
+    
+    const [sender, conversation, lastPrompt] = await Promise.all([
+      userModel.findById(messageToAdd.senderID),
+      conversationModel.findById(messageToAdd.conversationID),
+      messageModel.findOne({'conversationID' : messageToAdd.conversationID}).sort({createdAt: -1})
+    ]);
+    
+    // Validate the sender ID
     if(!sender) {
       return res.status(400).json({message: 'Invalid sender ID!'});
     }
-    conversation = await conversationModel.findById(messageToAdd.conversationID);
+    // Validate the conversation ID
     if(!conversation) {
       return res.status(400).json({message: 'Invalid conversation ID!'});
     }
+
+    var prompt = []
+    // Construct Message from last 
+    if (lastPrompt) {
+      console.log('last prompt: ',lastPrompt);
+      prompt = prompt.concat(
+      {
+        'role': 'user',
+        'content': lastPrompt.prompt
+      },
+      {
+        'role': 'assistant',
+        'content': lastPrompt.response
+      },
+      )
+    }
+    prompt = prompt.concat(
+      {
+        'role': 'user',
+        'content': messageToAdd.prompt
+      }
+    )
+  
     try{
-      const chatResponse = await getChatBotResponse(message.prompt);
+      const chatResponse = await getChatBotResponse(prompt);
       messageToAdd.response = chatResponse;
       await messageToAdd.save();
     } catch (error) {
@@ -120,7 +151,11 @@ exports.createNewConversation = async (req, res, next) => {
   });
 
   try{
-    const chatResponse = await getChatBotResponse(message.prompt);
+    const prompt = [{
+      'role': 'user',
+      'content': message.prompt
+    }]
+    const chatResponse = await getChatBotResponse(prompt);
     const conversation = [
       {'role': 'user', 'content': message.prompt},
       {'role': 'assistant', 'content': chatResponse},
@@ -143,6 +178,59 @@ exports.createNewConversation = async (req, res, next) => {
         conversation : conversationToAdd,
         message: messageToAdd,
       }
+    });
+  } catch (error) {
+    return res.status(500).json({message: 'Internal Server Error!' + error});
+  } finally{
+    next();
+  }
+}
+
+exports.getTourismRecommendation = async (req, res, next) => {
+  try {
+    // Capture data from the request
+    const {senderID, location, budget, startDate, endDate} = req.body;
+    if (!senderID) {
+      return res.status(400).json({message: 'Sender ID is required!'});
+    }
+    // Validate the sender ID
+    const sender = userModel.findById(senderID);
+    if(!sender) {
+      return res.status(400).json({message: 'Invalid sender ID!'});
+    }
+  
+    // Get the chat response
+    const chatResponse = await getTourismRecommendation(location, budget, startDate, endDate);
+
+    return res.status(201).json({
+      message: 'Success!',
+      data: chatResponse,
+    });
+  } catch (error) {
+    return res.status(500).json({message: 'Internal Server Error!' + error});
+  } finally{
+    next();
+  }
+}
+
+exports.customPrompt = async (req, res, next) => {
+  try {
+    // Capture data from the request
+    const {senderID, prompt} = req.body;
+    if (!senderID) {
+      return res.status(400).json({message: 'Sender ID is required!'});
+    }
+    // Validate the sender ID
+    const sender = userModel.findById(senderID);
+    if(!sender) {
+      return res.status(400).json({message: 'Invalid sender ID!'});
+    }
+  
+    // Get the chat response
+    const chatResponse = await getCustomPrompt(prompt);
+    return res.status(201).json({
+      message: 'Success!',
+      data: chatResponse,
     });
   } catch (error) {
     return res.status(500).json({message: 'Internal Server Error!' + error});
