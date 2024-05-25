@@ -1,21 +1,21 @@
 const {verify} = require('jsonwebtoken')
 
 const userMiddleware = (req, res, next) => {
-  try {
-    const credentials = req.headers;
-  if (!credentials.authorization) {
+  const credentials = req.header('Authorization') && req.header('Authorization').split(' ')[1];
+  if (!credentials) {
     return res.status(401).json({message: 'Unauthorized!'});
   }
-  token = credentials.authorization.split(' ')[1];
-  const decoded = verify(token, process.env.JWT_SECRET_KEY);
+  try {
+  const secret = process.env.JWT_SECRET_KEY;
+  const decoded = verify(credentials, secret);
   console.log(decoded);
   console.log(credentials.authorization);
+  req.user = decoded;
 
-  console.log('Middleware executed');
   next()
   } catch (error) {
     console.error('Error:', error);
-    return res.status(500).json({ message: 'Internal server error' });
+    res.status(400).json({ message: 'Invalid token.'});
   }
 }
 
