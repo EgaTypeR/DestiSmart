@@ -64,7 +64,7 @@ const getTourismRecommendation = async (location, budget, start, end) => {
     model: 'gpt-3.5-turbo-0125',
     messages: [
       { role: 'system', content: 'You are an assistant specialized in tourism. Please answer in Bahasa Indonesia.' },
-      { role: 'user', content: `Berikan rekomendasi wisata untuk daerah ${location} dengan budget ${budget} dari tanggal ${start} hingga ${end} beserta tempat penginapannya.`}
+      { role: 'user', content: `Berikan rekomendasi wisata untuk daerah ${location} dengan budget ${budget} dari tanggal ${start} hingga ${end} beserta tempat penginapannya. Berikan data sebanyak dan selengkap mungkin.`}
     ],
     temperature : 0.5,
     max_tokens  : 4096,
