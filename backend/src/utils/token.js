@@ -10,7 +10,7 @@ function generateToken(user) {
   const secretKey = process.env.JWT_SECRET_KEY; 
   // Generate the JWT token with the payload, a secret key, and options (if needed)
   const option = {
-    expiresIn: '60m'
+    expiresIn: '7d'
   }
   const token = jwt.sign(payload, secretKey, option);
   return token;
