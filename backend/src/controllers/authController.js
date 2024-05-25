@@ -25,12 +25,14 @@ exports.login = async (req, res, next) => {
     if (!result) {
       return res.status(401).json({ message: 'Invalid password' });
     }
-
     // Generate JWT token
     const token = generateToken(user);
+
+    const { password: userPassword, ...userResponse } = user._doc;
+
     return res.status(200).json({
       message: 'Login successful',
-      user: user,
+      user: userResponse,
       token: token
     });
   } catch (error) {
@@ -69,8 +71,7 @@ exports.register = async(req, res, next) => {
     const result = await newUser.save();
 
     return res.status(201).json({
-      message: 'User created successfully',
-      user: result
+      message: 'User created successfully, Go to login page to login.',
     });
   } catch (error) {
     console.error('Error:', error);
@@ -79,5 +80,5 @@ exports.register = async(req, res, next) => {
 }
 
 exports.logout = async(req, res, next) => {
-
+  // client side aja
 }
