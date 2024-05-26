@@ -150,12 +150,13 @@ exports.createNewConversation = async (req, res, next) => {
     console.log(conversationToAdd);
 
     // Create a new prompt
-    const prompt = `Coba Jelaskan tentang ${destination}.`;
+    const prompt = `Coba Jelaskan tentang ${destination}!`;
     const result = await getCustomPrompt(prompt);
 
     const messageToAdd = new messageModel({
       senderID: userID,
       conversationID: conversationToAdd._id,
+      prompt: prompt,
       response: result
     });
 

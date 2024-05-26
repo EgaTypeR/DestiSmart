@@ -66,7 +66,7 @@ exports.register = async(req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new userModel({
-      email: email,
+      email: email.toLowerCase(),
       password: hashedPassword,
       firstName: firstname,
       lastName: lastname,
