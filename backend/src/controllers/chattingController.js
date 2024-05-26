@@ -35,7 +35,6 @@ exports.sendMessage = async (req, res, next) => {
     var prompt = []
     // Construct Message from last 
     if (lastPrompt) {
-      console.log('last prompt: ',lastPrompt);
       prompt = prompt.concat(
       {
         'role': 'user',
@@ -107,12 +106,10 @@ exports.getConversation = async (req, res, next) => {
 
 exports.getListOfConversations = async (req, res, next) => {
   const userID = req.params.user_id;
-  console.log(userID);
   const page = parseInt(req.query.page) || 1;
   const pageSize = parseInt(req.query.pageSize) || 10;
   try{
     var conversations = await conversationModel.find({'userID' : userID}).limit(pageSize).skip(pageSize*(page-1)).sort({lastMessageDate: -1});
-    console.log(conversations);
     if (!conversations) {
       return res.status(404).json({message: 'No conversation found!'});
     }
@@ -148,7 +145,6 @@ exports.createNewConversation = async (req, res, next) => {
     });
 
     await conversationToAdd.save();
-    console.log(conversationToAdd);
 
     // Create a new prompt
     const prompt = `Coba Jelaskan tentang ${destination}!`;
@@ -161,7 +157,6 @@ exports.createNewConversation = async (req, res, next) => {
       response: result
     });
 
-    console.log(messageToAdd);
     await messageToAdd.save();
 
     return res.status(201).json({ 

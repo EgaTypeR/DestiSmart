@@ -14,7 +14,6 @@ const getChatBotResponse = async (prompt) => {
     },
   ]
   var message = initialTune.concat(prompt)
-  console.log(message)
   const data = {
     model: 'gpt-3.5-turbo-0125',
     messages: message,
@@ -40,7 +39,6 @@ const getChatBotResponse = async (prompt) => {
 
 const getTopic = async (prompt) => {
   message = prompt.concat({ role: 'system', content: 'You will given a conversation and ask to look for the topic. Answer the topic in one sentence. Please answer in Bahasa Indonesia.' })
-  console.log(message)
   const data = {
     model: 'gpt-3.5-turbo-0125',
     messages: message,
@@ -58,7 +56,6 @@ const getTopic = async (prompt) => {
       data,
       { headers },
     );
-    console.log(response.data);
     return response.data.choices[0].message.content;
   } catch (error) {
     console.error('Error:', error.response ? error.response.data : error.message);
@@ -77,7 +74,6 @@ const getTourismRecommendation = async (location, budget, start, end) => {
     max_tokens  : 4096,
     top_p       : 1
     };
-    console.log(data.messages)
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${apiKey}`,
@@ -95,7 +91,6 @@ const getTourismRecommendation = async (location, budget, start, end) => {
 }
 
 const getCustomPrompt = async (prompt) => {
-  console.log(prompt)
   const data = {
     model: 'gpt-3.5-turbo-0125',
     messages: [
@@ -115,7 +110,6 @@ const getCustomPrompt = async (prompt) => {
         url, 
         data, 
         { headers },);
-      console.log(response.data.choices[0].message.content)
       return response.data.choices[0].message.content;
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);
