@@ -13,7 +13,7 @@ const messageModel = new Schema ({
   },
   prompt: {
     type: String,
-    required: true
+    required: false
   },
   response:{
     type: String,

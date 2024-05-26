@@ -3,11 +3,13 @@ const userModel = require('../models/userModels');
 const {getChatBotResponse, getTopic, getTourismRecommendation, getCustomPrompt} = require('../utils/getChatbotResponse');
 const conversationModel = require('../models/conversationModel');
 const {IsValidObjectId} = require('../utils/validate');
+const { response } = require('express');
 
 exports.sendMessage = async (req, res, next) => {
   try {
     // Capture data from the request
     var message = req.body;
+    const destination = req.body.destination;
     if (!message) {
       return res.status(400).json({message: 'Message data is required!'});
     }
@@ -36,25 +38,32 @@ exports.sendMessage = async (req, res, next) => {
       prompt = prompt.concat(
       {
         'role': 'user',
-        'content': lastPrompt.prompt
+        'content': String(lastPrompt.prompt)
       },
       {
         'role': 'assistant',
-        'content': lastPrompt.response
+        'content': String(lastPrompt.response)
       },
       )
     }
     prompt = prompt.concat(
       {
         'role': 'user',
-        'content': messageToAdd.prompt
+        'content': `
+          Disini kamu akan membahas tentang ${destination}, 
+          jika dibawah ini membahas tentang lainnya abaikan atau bandingkan saja dengan prompt:
+          ${messageToAdd.prompt}
+          Jawab tetap berkaitan dengan tempat wisata ${destination}`
       }
     )
   
     try{
       const chatResponse = await getChatBotResponse(prompt);
       messageToAdd.response = chatResponse;
-      await messageToAdd.save();
+      await Promise.all([
+        messageToAdd.save(),
+        conversation.updateOne({'lastMessageDate' : Date.now()})
+      ]) 
     } catch (error) {
       return res.status(500).json({message: 'Internal Server Error!' + error});
     }
@@ -119,72 +128,48 @@ exports.getListOfConversations = async (req, res, next) => {
 }
 
 exports.createNewConversation = async (req, res, next) => {
-  const userID = req.params.user_id;
-  if (!userID) {
-    return res.status(400).json({message: 'No user ID provided!'});
-  }
-  
-  // Create a new conversation
-  var topic = 'New Chat'
-  var conversationToAdd = new conversationModel({
-    'userID': userID,
-    'name': topic,
-    'lastMessage' : '',
-    'lastMessageDate' : Date.now()
-  });
-
   try {
+    const userID = req.params.user_id;
+    const destination = req.body.destination;
+
+    if (!userID) {
+      return res.status(400).json({ message: 'No user ID provided!' });
+    }
+    if (!destination) {
+      return res.status(400).json({ message: 'No destination provided!' });
+    }
+
+    // Create a new conversation
+    const conversationToAdd = new conversationModel({
+      userID: userID,
+      name: destination,
+      lastMessageDate: Date.now()
+    });
+
     await conversationToAdd.save();
-  } catch (error) {
-    return res.status(500).json({message: 'Internal Server Error!' + error});
-  }
+    console.log(conversationToAdd);
 
-  // Create a new message
-  var message = req.body;
-  if (!message) {
-      return res.status(400).json({message: 'Message data is required!'});
-  }
-  var messageToAdd = new messageModel({
-    'senderID': userID,
-    'conversationID': conversationToAdd._id,
-    'prompt': message.prompt
-  });
+    // Create a new prompt
+    const prompt = `Coba Jelaskan tentang ${destination}.`;
+    const result = await getCustomPrompt(prompt);
 
-  try{
-    const prompt = [{
-      'role': 'user',
-      'content': message.prompt
-    }]
-    const chatResponse = await getChatBotResponse(prompt);
-    const conversation = [
-      {'role': 'user', 'content': message.prompt},
-      {'role': 'assistant', 'content': chatResponse},
-      {'role': 'user', 'content': 'What is the topic of this conversation?'}
-    ]
-    topic = await getTopic(conversation)
-    messageToAdd.response = chatResponse;
+    const messageToAdd = new messageModel({
+      senderID: userID,
+      conversationID: conversationToAdd._id,
+      response: result
+    });
+
+    console.log(messageToAdd);
     await messageToAdd.save();
-  } catch (error) {
-    return res.status(500).json({message: 'Internal Server Error!' + error});
-  }
 
-  conversationToAdd.name = topic;
-  conversationToAdd.date = Date.now();
-  try {
-    await conversationToAdd.save();
-    return res.status(201).json({
-      message: 'Conversation added successfully!',
-      data: {
-        conversation : conversationToAdd,
-        message: messageToAdd,
-      }
+    return res.status(201).json({ 
+      conversation : conversationToAdd,
+      message : messageToAdd
     });
   } catch (error) {
-    return res.status(500).json({message: 'Internal Server Error!' + error});
-  } finally{
-    next();
+    return res.status(500).json({ message: 'Internal Server Error: ' + error.message });
   }
-}
+};
 
 exports.getTourismRecommendation = async (req, res, next) => {
   try {

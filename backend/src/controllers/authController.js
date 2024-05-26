@@ -2,6 +2,7 @@ const {default: mongoose} = require('mongoose');
 const userModel = require('../models/userModels');
 const bcrypt = require('bcrypt');
 const {generateToken} = require('../utils/token');
+const {IsValidEmail} = require('../utils/validate');
 
 exports.login = async (req, res, next) => {
   try {
@@ -48,9 +49,12 @@ exports.register = async(req, res, next) => {
     if (!credentials) {
       return res.status(400).json({ message: 'Credentials are required!' });
     }
-    const { email, password, firstname, lastname} = credentials;
-    if (!email || !password || !firstname || !lastname) {
+    const { email, password, firstname, lastname, gender} = credentials;
+    if (!email || !password || !firstname || !lastname || !gender) {
       return res.status(400).json({ message: 'Fields are required!' });
+    }
+    if (!IsValidEmail(email)) {
+      return res.status(400).json({ message: 'Invalid email' });
     }
 
     const user = await userModel.findOne({ email: email });
@@ -65,7 +69,8 @@ exports.register = async(req, res, next) => {
       email: email,
       password: hashedPassword,
       firstName: firstname,
-      lastName: lastname
+      lastName: lastname,
+      gender: gender,
     })
 
     const result = await newUser.save();

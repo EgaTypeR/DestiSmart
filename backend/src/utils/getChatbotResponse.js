@@ -4,7 +4,14 @@ const url = 'https://api.openai.com/v1/chat/completions'
 
 const getChatBotResponse = async (prompt) => {
   const initialTune = [
-    { role: 'system', content: 'You are an assistant specialized in tourism. Only answer questions related to tourism. Please answer in Bahasa Indonesia. Please give the answer as much as you can.' },
+    { 
+      role: 'system', 
+      content: `
+        You are an assistant specialized in tourism. 
+        Only answer questions related to tourism. Please answer in Bahasa Indonesia. 
+        Please give the answer as much as you can.
+      ` 
+    },
   ]
   var message = initialTune.concat(prompt)
   console.log(message)
@@ -88,6 +95,7 @@ const getTourismRecommendation = async (location, budget, start, end) => {
 }
 
 const getCustomPrompt = async (prompt) => {
+  console.log(prompt)
   const data = {
     model: 'gpt-3.5-turbo-0125',
     messages: [
@@ -107,6 +115,7 @@ const getCustomPrompt = async (prompt) => {
         url, 
         data, 
         { headers },);
+      console.log(response.data.choices[0].message.content)
       return response.data.choices[0].message.content;
     } catch (error) {
       console.error('Error:', error.response ? error.response.data : error.message);

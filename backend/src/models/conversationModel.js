@@ -10,10 +10,6 @@ const conversationModel = new Schema ({
     type: String,
     required: false
   },
-  lastMessage :{
-    type: String,
-    required: false
-  },
   lastMessageDate : {
     type: Date,
     required: false
