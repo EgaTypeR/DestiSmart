@@ -15,7 +15,7 @@ exports.login = async (req, res, next) => {
       return res.status(400).json({ message: 'Email and password are required!' });
     }
 
-    const user = await userModel.findOne({ email: email });
+    const user = await userModel.findOne({ email: email.toLowerCase() });
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
