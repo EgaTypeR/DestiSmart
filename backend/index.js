@@ -15,6 +15,7 @@ const globalErrorHandler = require('./src/controllers/errController')
 const UserRouter = require('./src/routers/userRouter')
 const ChattingRouter = require('./src/routers/chattingRoute')
 const AuthRouter = require('./src/routers/authRoute')
+const DistanceRouter = require('./src/routers/distanceRoute')
 
 const app = express()
 SetupDB()
@@ -46,6 +47,8 @@ app.get('/', (req, res) => {
 app.use('/api/v1/user', UserRouter)
 app.use('/api/v1/chat', ChattingRouter)
 app.use('/api/v1/auth', AuthRouter)
+app.use('/api/v1/distance', DistanceRouter)
+
 
 // app.use('*', (req, res, next) => {
 //   const err = new AppError(404, 'fail', 'undefined route');
