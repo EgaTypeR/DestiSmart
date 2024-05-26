@@ -4,6 +4,7 @@ const {getChatBotResponse, getTopic, getTourismRecommendation, getCustomPrompt} 
 const conversationModel = require('../models/conversationModel');
 const {IsValidObjectId} = require('../utils/validate');
 const { response } = require('express');
+const mongoose = require('mongoose');
 
 exports.sendMessage = async (req, res, next) => {
   try {
@@ -224,3 +225,36 @@ exports.customPrompt = async (req, res, next) => {
     next();
   }
 }
+
+exports.deleteConversation = async (req, res, next) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const { userID, conversationID } = req.body;
+
+    if (!userID || !conversationID) {
+      return res.status(400).json({ message: 'User ID and Conversation ID are required!' });
+    }
+
+    await conversationModel.findOneAndDelete(
+      { userID: userID, _id: conversationID },
+      { session }
+    );
+
+    await messageModel.deleteMany(
+      { senderID: userID, conversationID: conversationID },
+      { session }
+    );
+
+    await session.commitTransaction();
+    session.endSession();
+
+    return res.status(200).json({ message: 'Conversation has been deleted!' });
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    console.error('Error deleting conversation:', error);
+    return res.status(500).json({ message: 'Internal Server Error: ' + error.message });
+  }
+};
