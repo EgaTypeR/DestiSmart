@@ -33,7 +33,7 @@ exports.distanceData = async (req, res) => {
       })
       .sort((a, b) => a.distance - b.distance);
 
-    res.status(200).json(updatedLocate);
+    res.status(200).json(updatedLocate.slice(0, display));
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error!' + error });
   }
