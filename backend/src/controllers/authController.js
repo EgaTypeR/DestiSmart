@@ -1,4 +1,3 @@
-const {default: mongoose} = require('mongoose');
 const userModel = require('../models/userModels');
 const bcrypt = require('bcrypt');
 const {generateToken} = require('../utils/token');

@@ -3,7 +3,6 @@ const userModel = require('../models/userModels');
 const {getChatBotResponse, getTopic, getTourismRecommendation, getCustomPrompt} = require('../utils/getChatbotResponse');
 const conversationModel = require('../models/conversationModel');
 const {IsValidObjectId} = require('../utils/validate');
-const { response } = require('express');
 const mongoose = require('mongoose');
 
 exports.sendMessage = async (req, res, next) => {
