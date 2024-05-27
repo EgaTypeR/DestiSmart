@@ -17,10 +17,9 @@ const ChattingRouter = require('./src/routers/chattingRoute')
 const AuthRouter = require('./src/routers/authRoute')
 const DistanceRouter = require('./src/routers/distanceRoute')
 
-// Cors Options
 const corsOptions = {
   origin: (origin, callback) => {
-    const allowedOrigins = process.env.CORS_ORIGINS.split(',');
+    const allowedOrigins = ["http://localhost:3000", "https://desti-smart.vercel.app"];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
