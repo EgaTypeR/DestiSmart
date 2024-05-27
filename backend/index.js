@@ -17,23 +17,11 @@ const ChattingRouter = require('./src/routers/chattingRoute')
 const AuthRouter = require('./src/routers/authRoute')
 const DistanceRouter = require('./src/routers/distanceRoute')
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    const allowedOrigins = ["http://localhost:3000", "https://desti-smart.vercel.app"];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Allow cookies to be sent with requests
-  optionsSuccessStatus: 204
-};
+
 
 const app = express()
 SetupDB()
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(helmet())
 app.use(express.json({
   limit: '15kb'
