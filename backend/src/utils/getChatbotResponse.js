@@ -15,7 +15,7 @@ const getChatBotResponse = async (prompt) => {
   ]
   var message = initialTune.concat(prompt)
   const data = {
-    model: 'gpt-4o',
+    model: 'gpt-3.5-turbo-0125',
     messages: message,
     temperature : 0.5,
     max_tokens  : 4096,
@@ -40,7 +40,7 @@ const getChatBotResponse = async (prompt) => {
 const getTopic = async (prompt) => {
   message = prompt.concat({ role: 'system', content: 'You will given a conversation and ask to look for the topic. Answer the topic in one sentence. Please answer in Bahasa Indonesia.' })
   const data = {
-    model: 'gpt-4o',
+    model: 'gpt-3.5-turbo-0125',
     messages: message,
     temperature : 1,
     max_tokens  : 256,
@@ -65,7 +65,7 @@ const getTopic = async (prompt) => {
 
 const getTourismRecommendation = async (location, budget, start, end) => {
   const data = {
-    model: 'gpt-4o',
+    model: 'gpt-3.5-turbo-0125',
     messages: [
       { role: 'system', content: 'You are an assistant specialized in tourism. Please answer in Bahasa Indonesia.' },
       { role: 'user', content: `Berikan rekomendasi wisata untuk daerah ${location} dengan budget ${budget} dari tanggal ${start} hingga ${end} beserta tempat penginapannya. Berikan data sebanyak dan selengkap mungkin.`}
@@ -92,7 +92,7 @@ const getTourismRecommendation = async (location, budget, start, end) => {
 
 const getCustomPrompt = async (prompt) => {
   const data = {
-    model: 'gpt-4o',
+    model: 'gpt-3.5-turbo-0125',
     messages: [
       { role: 'system', content: 'You are an assistant specialized in tourism. Only answer questions related to tourism. Please answer in Bahasa Indonesia.' },
       { role: 'user', content: prompt}
